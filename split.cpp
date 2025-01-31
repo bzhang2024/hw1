@@ -14,10 +14,39 @@ the function below should be the only one in this file.
 
 /* Add a prototype for a helper function here if you need */
 
-void split(Node*& in, Node*& odds, Node*& evens)
+//void splitSort(Node* current, Node*& odds, Node*& evens);
+
+//in, odds, and evens are pointers passed by reference
+void split(Node*& in, Node*& odds, Node*& evens) 
 {
   /* Add code here */
 // WRITE YOUR CODE HERE
+
+  //Base case
+  if (in == NULL){
+    odds = NULL;
+    evens = NULL;
+    return;
+  }
+
+  //make a temp tracker to node
+  Node* temp = in;
+  in = in->next; 
+
+  split(in, odds, evens);
+
+  temp->next = NULL;
+  if (temp->value % 2 == 0) { //number is even
+    temp->next = evens;   
+    evens = temp;  //add number to front of list
+  }
+  else { //num is odd
+    temp->next = odds;
+    odds = temp; 
+  }
+
+
 }
 
 /* If you needed a helper function, write it here */
+//nah thats cringe
