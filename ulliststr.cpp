@@ -1,6 +1,9 @@
 #include <cstddef>
 #include <stdexcept>
 #include "ulliststr.h"
+#include <exception>
+
+using namespace std;
 
 ULListStr::ULListStr()
 {
@@ -25,6 +28,89 @@ size_t ULListStr::size() const
 }
 
 // WRITE YOUR CODE HERE
+void ULListStr::push_back(const string& val){
+  if (empty()){
+    head_ = new Item;
+    tail_ = head_;
+    head_->val[0] = val;
+    head_->last = 1; //list now 0 to 1
+  }
+  else if (tail_->last < ARRSIZE){
+    tail_->val[tail_->last] = val;
+    tail_->last++; 
+  }
+  else {
+    Item* temp = new Item; //create a new node to append
+    temp->val[0] = val; 
+    temp->last = 1;
+    
+    tail_->next = temp; 
+    temp->prev = tail_; 
+    tail_ = temp; 
+  }
+
+  size_++; //add item
+}
+
+void ULListStr::pop_back(){
+  if (empty()){
+    return; 
+  }
+  tail_->last--;
+  size_--;
+  if(tail_->first == tail_->last) {  //if array is empty
+    if(head_ == tail_) { 
+      delete head_; 
+            head_ = tail_ = NULL;
+    }
+    else { //otherwise, adjust tail
+      Item* curr_tail = tail_;
+      tail_ = tail_->prev;
+      tail_->next = NULL;
+      delete curr_tail; 
+    }
+  }
+}
+
+void ULListStr::pop_front(){
+  if (empty()) {
+        return;
+    }
+    
+    head_->first++;
+    size_--;
+    
+    if (head_->first == head_->last) {  
+        if (head_ == tail_) {  
+            delete head_;
+            head_ = tail_ = NULL;
+        }
+        else {  // otherwise, adjust head
+            Item* temp = head_;
+            head_ = head_->next;
+            head_->prev = NULL;
+            delete temp;
+        }
+    }
+
+}
+
+string const& ULListStr::back() const{
+  //returns element at back of linked list
+  if (empty()){
+    throw invalid_argument("List is empty");
+  }
+  return tail_->[tail_->last - 1];
+}
+
+string const& ULListStr::front() const{
+  //returns element at front of linked list
+  if (empty()){
+    throw invalid_argument("List is empty");
+  
+  }
+  return head_->val[head_->first];
+}
 
 void ULListStr::set(size_t loc, const std::string& val)
 {
