@@ -28,6 +28,31 @@ size_t ULListStr::size() const
 }
 
 // WRITE YOUR CODE HERE
+// Check if location is valid
+string* ULListStr::getValAtLoc(size_t loc) const {
+    if(loc >= size_) {  //out of bounds
+        return NULL;
+    }
+  
+    Item* temp = head_;
+    int idx = 0;
+    
+    // Find the right node
+    while(temp != NULL) {
+  
+        // Check if loc is in this node
+        if(idx + (temp->last - temp->first) > loc) {
+            
+            int diff = loc - idx;
+            return &temp->val[temp->first + diff];
+        }
+        
+        // Move to next node
+        idx += (temp->last - temp->first); 
+        temp = temp->next; 
+    }
+}
+
 void ULListStr::push_back(const string& val){
   if (empty()){
     head_ = new Item;
