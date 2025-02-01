@@ -51,6 +51,7 @@ string* ULListStr::getValAtLoc(size_t loc) const {
         idx += (temp->last - temp->first); 
         temp = temp->next; 
     }
+  return NULL; 
 }
 
 void ULListStr::push_back(const string& val){
@@ -97,6 +98,8 @@ void ULListStr::push_front(const string& val){
     temp->next = head_; 
     head_ = temp; 
   }
+
+  size_++
 }
 
 void ULListStr::pop_back(){
