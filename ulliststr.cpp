@@ -77,6 +77,28 @@ void ULListStr::push_back(const string& val){
   size_++; //add item
 }
 
+void ULListStr::push_front(const string& val){
+  if (empty()){
+    head_ = new Item;
+    tail_ = head_;
+    head_->val[0] = val;
+    head_->last = 1; //list now 0 to 1
+  }
+  else {
+    Item* temp = new Item; //create a new node to append
+    temp->val[ARRSIZE-1] = val; 
+    temp->first = ARRSIZE-1;
+    temp->last = ARRSIZE;
+
+   
+    
+    
+    head_->prev = temp;
+    temp->next = head_; 
+    head_ = temp; 
+  }
+}
+
 void ULListStr::pop_back(){
   if (empty()){
     return; 
