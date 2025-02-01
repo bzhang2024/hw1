@@ -99,7 +99,7 @@ void ULListStr::push_front(const string& val){
     head_ = temp; 
   }
 
-  size_++
+  size_++;
 }
 
 void ULListStr::pop_back(){
