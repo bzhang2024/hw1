@@ -125,7 +125,7 @@ string const& ULListStr::back() const{
   if (empty()){
     throw invalid_argument("List is empty");
   }
-  return tail_->[tail_->last - 1];
+  return tail_->val[tail_->last - 1];
 }
 
 string const& ULListStr::front() const{
